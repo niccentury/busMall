@@ -3,6 +3,8 @@
 function Products(filename) {
   this.filename = filename;
   this.votes = 0;
+  this.click = 0;
+  this.timesDisplayed = 0;
   Products.allproducts.push(this);
 }
 Products.allproducts = [];
@@ -43,7 +45,7 @@ function displayThreeNewproducts() {
     var firstProductIndex = Math.floor(Math.random() * Products.allproducts.length);
     var secondProductsIndex = Math.floor(Math.random() * Products.allproducts.length);
     var thirdProductsIndex = Math.floor(Math.random() * Products.allproducts.length);
-  } while (firstProductIndex === thirdProductsIndex || firstProductIndex === secondProductsIndex || secondProductsIndex === thirdProductsIndex);
+  } while (firstProductIndex === thirdProductsIndex);(firstProductIndex === secondProductsIndex);(secondProductsIndex === thirdProductsIndex);
   //   products1 = Products.allproducts[];
   //   products2 = Products.allproducts[];
   products3 = Products.allproducts[thirdProductsIndex];
