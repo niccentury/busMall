@@ -1,5 +1,10 @@
 'use strict';
 
+
+var totalclicks = 0;
+var pastDisplayed = [];
+
+
 function Products(displayName, filename) {
   this.displayName = displayName;
   this.filename = filename;
@@ -9,12 +14,6 @@ function Products(displayName, filename) {
   Products.allproducts.push(this);
 }
 Products.allproducts = [];
-
-var totalclicks = 0;
-
-var pastDisplayed = [];
-
-
 
 
 var products1 = new Products('Bag', 'img/bag.jpg');
