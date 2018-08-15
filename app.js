@@ -1,6 +1,7 @@
 'use strict';
 
-function Products(filename) {
+function Products(displayName, filename) {
+  this.displayName = displayName;
   this.filename = filename;
   this.votes = 0;
   this.clicks = 0;
@@ -16,26 +17,26 @@ var pastDisplayed = [];
 
 
 
-var products1 = new Products('img/bag.jpg');
-var products2 = new Products('img/banana.jpg');
-var products3 = new Products('img/bathroom.jpg');
-new Products('img/boots.jpg');
-new Products('img/breakfast.jpg');
-new Products('img/bubblegum.jpg');
-new Products('img/chair.jpg');
-new Products('img/cthulhu.jpg');
-new Products('img/dog-duck.jpg');
-new Products('img/dragon.jpg');
-new Products('img/pen.jpg');
-new Products('img/pet-sweep.jpg');
-new Products('img/scissors.jpg');
-new Products('img/shark.jpg');
-new Products('img/sweep.png');
-new Products('img/tauntaun.jpg');
-new Products('img/unicorn.jpg');
-new Products('img/usb.gif');
-new Products('img/water-can.jpg');
-new Products('img/wine-glass.jpg');
+var products1 = new Products('Bag', 'img/bag.jpg');
+var products2 = new Products('Banana', 'img/banana.jpg');
+var products3 = new Products('Bathroom', 'img/bathroom.jpg');
+new Products('Boots', 'img/boots.jpg');
+new Products('Breakfast', 'img/breakfast.jpg');
+new Products('Bubblegum', 'img/bubblegum.jpg');
+new Products('Chair', 'img/chair.jpg');
+new Products('Demon', 'img/cthulhu.jpg');
+new Products('Duck Mask', 'img/dog-duck.jpg');
+new Products('Dragon Meat', 'img/dragon.jpg');
+new Products('Pen Utensils', 'img/pen.jpg');
+new Products('Sweep Shoe', 'img/pet-sweep.jpg');
+new Products('Scissors', 'img/scissors.jpg');
+new Products('Sharks', 'img/shark.jpg');
+new Products('Sweep', 'img/sweep.png');
+new Products('Tauntaun', 'img/tauntaun.jpg');
+new Products('Unicorn', 'img/unicorn.jpg');
+new Products('Usb', 'img/usb.gif');
+new Products('Water Can', 'img/water-can.jpg');
+new Products('Wine Glass', 'img/wine-glass.jpg');
 
 console.log(Products.allproducts);
 
@@ -77,9 +78,6 @@ function displayThreeNewproducts() {
   img3.src = products3.filename;
 }
 
-function stopEvent(){
-  document.getElementById('stop').setAttribute('style', 'display:none');
-}
 // event listeners
 // where are we listening? the images
 var img1 = document.getElementsByTagName('img')[0];
@@ -93,7 +91,8 @@ img1.addEventListener('click', function() {
     products1.votes++;
     displayThreeNewproducts();
   }
-  else{stopEvent();}
+  else{
+    displayVotes();}
   // products1.votes = products1.votes + 1;
 
 });
@@ -107,7 +106,7 @@ img2.addEventListener('click', function() {
 
     displayThreeNewproducts();
   }
-  else{stopEvent();}
+  else{displayVotes();}
   // products1.votes = products1.votes + 1;
 
 });
@@ -120,10 +119,58 @@ img3.addEventListener('click', function() {
     products3.votes++;
     displayThreeNewproducts();
   }
-  else{stopEvent();}
+  else{displayVotes();}
   // products1.votes = products1.votes + 1;
 });
 
+
+function displayVotes(){
+  var stopEvent = (function() {
+    document.getElementById('stop').setAttribute('style', 'display:none');
+  })();
+
+  var displayLabels = Products.allproducts.map(function(product){ return product.displayName; });
+  var displayVotes = Products.allproducts.map(function(product){return product.votes; });
+  var ctx = document.getElementById('votesChart');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: displayLabels,
+      datasets: [{
+        label: '# of Votes',
+        data: displayVotes,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+}
+
+// displayVotes();
 
 
 
