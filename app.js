@@ -5,36 +5,17 @@ var totalclicks = 0;
 var pastDisplayed = [];
 
 
-function Products(displayName, filename) {
+function Products(displayName, filename, votes = 0, timesDisplayed = 0) {
   this.displayName = displayName;
   this.filename = filename;
-  this.votes = 0;
-  this.timesDisplayed = 0;
+  this.votes = votes;
+  this.timesDisplayed = timesDisplayed;
   Products.allproducts.push(this);
 }
 Products.allproducts = [];
 
 
-var products1 = new Products('Bag', 'img/bag.jpg');
-var products2 = new Products('Banana', 'img/banana.jpg');
-var products3 = new Products('Bathroom', 'img/bathroom.jpg');
-// new Products('Boots', 'img/boots.jpg');
-// new Products('Breakfast', 'img/breakfast.jpg');
-// new Products('Bubblegum', 'img/bubblegum.jpg');
-// new Products('Chair', 'img/chair.jpg');
-// new Products('Demon', 'img/cthulhu.jpg');
-// new Products('Duck Mask', 'img/dog-duck.jpg');
-// new Products('Dragon Meat', 'img/dragon.jpg');
-// new Products('Pen Utensils', 'img/pen.jpg');
-// new Products('Sweep Shoe', 'img/pet-sweep.jpg');
-// new Products('Scissors', 'img/scissors.jpg');
-// new Products('Sharks', 'img/shark.jpg');
-// new Products('Sweep', 'img/sweep.png');
-// new Products('Tauntaun', 'img/tauntaun.jpg');
-// new Products('Unicorn', 'img/unicorn.jpg');
-// new Products('Usb', 'img/usb.gif');
-// new Products('Water Can', 'img/water-can.jpg');
-// new Products('Wine Glass', 'img/wine-glass.jpg');
+
 
 console.log(Products.allproducts);
 
@@ -43,28 +24,42 @@ function displayed(){
   products2.timesDisplayed++;
   products3.timesDisplayed++;
 }
-
+var firstProductIndex = 0;
+var secondProductsIndex = 1;
+var thirdProductsIndex = 2;
 function displayThreeNewproducts() {
   localStorage.setItem('products', JSON.stringify(Products.allproducts));
   // show new pictures to user
   // grab 2 productss at random
-  do {
-    var firstProductIndex = Math.floor(Math.random() * Products.allproducts.length);}
-  while (firstProductIndex === secondProductsIndex || firstProductIndex === thirdProductsIndex || pastDisplayed.includes(firstProductIndex));
-
-  do {var secondProductsIndex = Math.floor(Math.random() * Products.allproducts.length);}
-  while (secondProductsIndex === firstProductIndex || secondProductsIndex === thirdProductsIndex || pastDisplayed.includes(secondProductsIndex));
-
-  do {var thirdProductsIndex = Math.floor(Math.random() * Products.allproducts.length);}
-  while (thirdProductsIndex === firstProductIndex || thirdProductsIndex === secondProductsIndex || pastDisplayed.includes(thirdProductsIndex));
+  // var firstProductIndex = 0;
+  // var secondProductsIndex = 0;
+  // var thirdProductsIndex = 0;
 
   pastDisplayed[0] = firstProductIndex;
   pastDisplayed[1] = secondProductsIndex;
   pastDisplayed[2] = thirdProductsIndex;
 
+  console.log('PAST INDEXES', pastDisplayed);
+
+  console.log('FIRST INDEX BEFORE', firstProductIndex);
+  console.log('SECOND INDEX BEFORE', secondProductsIndex);
+  console.log('THIRD INDEX BEFORE', thirdProductsIndex);
+
+
+  do {
+    firstProductIndex = Math.floor(Math.random() * Products.allproducts.length);}
+  while (firstProductIndex === secondProductsIndex || firstProductIndex === thirdProductsIndex || pastDisplayed.includes(firstProductIndex));
+
+  do {
+    secondProductsIndex = Math.floor(Math.random() * Products.allproducts.length);}
+  while (secondProductsIndex === firstProductIndex || secondProductsIndex === thirdProductsIndex || pastDisplayed.includes(secondProductsIndex));
+
+  do {
+    thirdProductsIndex = Math.floor(Math.random() * Products.allproducts.length);}
+  while (thirdProductsIndex === firstProductIndex || thirdProductsIndex === secondProductsIndex || pastDisplayed.includes(thirdProductsIndex));
+
+
   displayed();
-
-
 
   products1 = Products.allproducts[firstProductIndex];
   products2 = Products.allproducts[secondProductsIndex];
@@ -137,43 +132,45 @@ img3.addEventListener('click', function() {
     //localstorage goes here
     displayVotes();
   }
+
   // products1.votes = products1.votes + 1;
 });
 
-var productData = JSON.parse(localStorage.getItem('Products'));
+var productData = JSON.parse(localStorage.getItem('products'));
 
-function storageHold(){
-  if(productData){
-    console.log('Storage Exists');
-    for(var i = 0; i < Products.allproducts.length; i++){
-      new Products(productData[i].filename, productData[i].votes, productData[i].timesDisplayed);
-    }
-  }else{
-    new Products('Bag', 'img/bag.jpg');
-    new Products('Banana', 'img/banana.jpg');
-    new Products('Bathroom', 'img/bathroom.jpg');
-    new Products('Boots', 'img/boots.jpg');
-    new Products('Breakfast', 'img/breakfast.jpg');
-    new Products('Bubblegum', 'img/bubblegum.jpg');
-    new Products('Chair', 'img/chair.jpg');
-    new Products('Demon', 'img/cthulhu.jpg');
-    new Products('Duck Mask', 'img/dog-duck.jpg');
-    new Products('Dragon Meat', 'img/dragon.jpg');
-    new Products('Pen Utensils', 'img/pen.jpg');
-    new Products('Sweep Shoe', 'img/pet-sweep.jpg');
-    new Products('Scissors', 'img/scissors.jpg');
-    new Products('Sharks', 'img/shark.jpg');
-    new Products('Sweep', 'img/sweep.png');
-    new Products('Tauntaun', 'img/tauntaun.jpg');
-    new Products('Unicorn', 'img/unicorn.jpg');
-    new Products('Usb', 'img/usb.gif');
-    new Products('Water Can', 'img/water-can.jpg');
-    new Products('Wine Glass', 'img/wine-glass.jpg');
-    localStorage.setItem('userVotes', JSON.stringify(Products.allproducts));
-    console.log('Storage does not exist');
+
+if(productData){
+  console.log('Storage Exists');
+  for(var i = 0; i < productData.length; i++){
+    new Products(productData[i].displayName, productData[i].filename, productData[i].votes, productData[i].timesDisplayed);
   }
+  var products1 = Products.allproducts[0];
+  var products2 = Products.allproducts[1];
+  var products3 = Products.allproducts[2];
+}else{
+  products1 = new Products('Bag', 'img/bag.jpg');
+  products2 = new Products('Banana', 'img/banana.jpg');
+  products3 = new Products('Bathroom', 'img/bathroom.jpg');
+  new Products('Boots', 'img/boots.jpg');
+  new Products('Breakfast', 'img/breakfast.jpg');
+  new Products('Bubblegum', 'img/bubblegum.jpg');
+  new Products('Chair', 'img/chair.jpg');
+  new Products('Demon', 'img/cthulhu.jpg');
+  new Products('Duck Mask', 'img/dog-duck.jpg');
+  new Products('Dragon Meat', 'img/dragon.jpg');
+  new Products('Pen Utensils', 'img/pen.jpg');
+  new Products('Sweep Shoe', 'img/pet-sweep.jpg');
+  new Products('Scissors', 'img/scissors.jpg');
+  new Products('Sharks', 'img/shark.jpg');
+  new Products('Sweep', 'img/sweep.png');
+  new Products('Tauntaun', 'img/tauntaun.jpg');
+  new Products('Unicorn', 'img/unicorn.jpg');
+  new Products('Usb', 'img/usb.gif');
+  new Products('Water Can', 'img/water-can.jpg');
+  new Products('Wine Glass', 'img/wine-glass.jpg');
+
+  console.log('Storage does not exist');
 }
-storageHold();
 
 
 
@@ -214,9 +211,10 @@ function displayVotes(){
     },
     options: {
       scales: {
-        yAxes: [{
+        xAxes: [{
           ticks: {
-            beginAtZero:true
+            beginAtZero:true,
+            autoSkip: false,
           }
         }]
       }
