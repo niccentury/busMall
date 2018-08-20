@@ -29,11 +29,7 @@ var secondProductsIndex = 1;
 var thirdProductsIndex = 2;
 function displayThreeNewproducts() {
   localStorage.setItem('products', JSON.stringify(Products.allproducts));
-  // show new pictures to user
-  // grab 2 productss at random
-  // var firstProductIndex = 0;
-  // var secondProductsIndex = 0;
-  // var thirdProductsIndex = 0;
+
 
   pastDisplayed[0] = firstProductIndex;
   pastDisplayed[1] = secondProductsIndex;
@@ -78,17 +74,7 @@ var img2 = document.getElementsByTagName('img')[1];
 var img3 = document.getElementsByTagName('img')[2];
 // what are we listening for? click
 
-// function getVotes(product) {
-//   if (totalclicks < 25){
-//     totalclicks++;
-//     product.votes++;
-//     displayThreeNewproducts();
-//   }
-//   else{
-//     //localstorage goes here
-//     displayVotes();
-//   }
-// }
+
 
 
 img1.addEventListener('click', function() {
@@ -180,6 +166,8 @@ function displayVotes(){
     document.getElementById('stop').setAttribute('style', 'display:none');
   })();
 
+
+
   var displayLabels = Products.allproducts.map(function(product){ return product.displayName; });
   var displayVotes = Products.allproducts.map(function(product){return product.votes; });
   var ctx = document.getElementById('votesChart');
@@ -196,7 +184,27 @@ function displayVotes(){
           'rgba(255, 206, 86, 0.2)',
           'rgba(75, 192, 192, 0.2)',
           'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          //'rgba(255, 159, 64, 0.2)'
         ],
         borderColor: [
           'rgba(255,99,132,1)',
@@ -204,7 +212,27 @@ function displayVotes(){
           'rgba(255, 206, 86, 1)',
           'rgba(75, 192, 192, 1)',
           'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          //'rgba(255, 159, 64, 1)'
         ],
         borderWidth: 1
       }]
@@ -222,7 +250,7 @@ function displayVotes(){
   });
 }
 
-// displayVotes();
+
 
 
 
