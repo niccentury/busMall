@@ -29,11 +29,7 @@ var secondProductsIndex = 1;
 var thirdProductsIndex = 2;
 function displayThreeNewproducts() {
   localStorage.setItem('products', JSON.stringify(Products.allproducts));
-  // show new pictures to user
-  // grab 2 productss at random
-  // var firstProductIndex = 0;
-  // var secondProductsIndex = 0;
-  // var thirdProductsIndex = 0;
+
 
   pastDisplayed[0] = firstProductIndex;
   pastDisplayed[1] = secondProductsIndex;
@@ -78,17 +74,7 @@ var img2 = document.getElementsByTagName('img')[1];
 var img3 = document.getElementsByTagName('img')[2];
 // what are we listening for? click
 
-// function getVotes(product) {
-//   if (totalclicks < 25){
-//     totalclicks++;
-//     product.votes++;
-//     displayThreeNewproducts();
-//   }
-//   else{
-//     //localstorage goes here
-//     displayVotes();
-//   }
-// }
+
 
 
 img1.addEventListener('click', function() {
@@ -178,15 +164,9 @@ if(productData){
 function displayVotes(){
   var stopEvent = (function() {
     document.getElementById('stop').setAttribute('style', 'display:none');
-    document.getElementById('text').setAttribute('style', 'display:none');
-    var votesUlist = document.getElementById('votesList');
-    var listData = document.createElement('li');
-    for (i=0; i < Products.allproducts.length; i++) {
-      listData = Products.allproducts[i].votes;
-      votesUlist.appendChild(listData);
-    }
-
   })();
+
+
 
   var displayLabels = Products.allproducts.map(function(product){ return product.displayName; });
   var displayVotes = Products.allproducts.map(function(product){return product.votes; });
@@ -223,7 +203,7 @@ function displayVotes(){
           'rgba(54, 162, 235, 0.2)',
           'rgba(255, 206, 86, 0.2)',
           'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)'
+          'rgba(153, 102, 255, 0.2)',
           //'rgba(255, 159, 64, 0.2)'
         ],
         borderColor: [
@@ -251,8 +231,8 @@ function displayVotes(){
           'rgba(54, 162, 235, 1)',
           'rgba(255, 206, 86, 1)',
           'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)'
-          //'rgba(255, 159, 64, 1)',
+          'rgba(153, 102, 255, 1)',
+          //'rgba(255, 159, 64, 1)'
         ],
         borderWidth: 1
       }]
@@ -270,7 +250,7 @@ function displayVotes(){
   });
 }
 
-//displayVotes();
+
 
 
 
